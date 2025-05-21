@@ -7,12 +7,20 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    $posts = [];
+    $myPosts = collect();
+    $otherPosts = Post::all();
+
     if (Auth::check()) {
-        $posts = Post::where('user_id', Auth::id())->get();
+        $myPosts = Post::where('user_id', Auth::id())->get();
+        $otherPosts = Post::where('user_id', '!=', Auth::id())->get();
     }
-    return view('home', ['posts' => $posts]);
+
+    return view('home', [
+        'myPosts' => $myPosts,
+        'otherPosts' => $otherPosts
+    ]);
 });
+
 
 // User routes
 Route::post('/register', [UserController::class, 'register']);
