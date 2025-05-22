@@ -7,7 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    $myPosts = collect();
+    $myPosts = [];
     $otherPosts = Post::all();
 
     if (Auth::check()) {
