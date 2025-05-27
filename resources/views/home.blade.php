@@ -13,7 +13,7 @@
             <!-- User logged in - centered content, no video -->
             <div class="container-centered">
                 <navbar>
-                    <h1>SwolePosts</h1>
+                    <h1 class="navbar-title">SwolePosts</h1>
                     <div class="navbar-info">
                         <p>{{ auth()->user()->name }} logged in</p>
                         <form action="/logout" method="POST">
@@ -26,8 +26,8 @@
                     <h2>Create a new post</h2>
                     <form action="/create-post" method="POST">
                         @csrf
-                        <input type="text" name="title" placeholder="post title">
-                        <textarea id="autogrow" name="body" placeholder="body content"></textarea>
+                        <input type="text" name="title" placeholder="What'd you train today?">
+                        <textarea id="autogrow" name="body" placeholder="Start typing..."></textarea>
                         <button>Save Post</button>
                     </form>
                 </div>
@@ -48,14 +48,16 @@
                             <h3>{{ $post['title'] }} by {{ $post->user->name }} on {{ $post->created_at->format('M d, Y') }}
                             </h3>
                             {{ $post['body'] }}
-                            <div class="button"><!-- wes the edit button needs to match the delete button -->
-                                <a href="/edit-post/{{ $post->id }}">Edit</a>
+                            <div class="button-group">
+                                <div class="button">
+                                    <a href="/edit-post/{{ $post->id }}">Edit</a>
+                                </div>
+                                <form action="/delete-post/{{ $post->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button>Delete</button>
+                                </form>
                             </div>
-                            <form action="/delete-post/{{ $post->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button>Delete</button>
-                            </form>
                         </div>
                     @endforeach
                 </div>

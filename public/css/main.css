@@ -4,18 +4,22 @@
     box-sizing: border-box;
 }
 
+:root {
+    --primary-color: #ff4757;
+    --secondary-color: #f53747;
+    --post-color: #1d1d1d;
+    --background-color: rgb(10, 10, 10);
+    --text-color: #ffffff;
+    --border-color: #4d4d4d;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: "Montserrat", "Roboto", sans-serif;
-    color: #333;
-    background-color: #f8f9fa;
+    color: var(--text-color);
+    background-color: var(--background-color);
     line-height: 1.6;
-}
-
-.container {
-    display: flex;
-    min-height: 100vh;
 }
 
 h1,
@@ -26,8 +30,7 @@ h5,
 h6 {
     font-family: "Montserrat", sans-serif;
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: #222;
+    color: #ffffff;
 }
 
 h1 {
@@ -42,33 +45,29 @@ h2 {
 
 h3 {
     font-size: 1.2rem;
-    color: #444;
 }
 
 p {
     margin-bottom: 1rem;
-    color: #555;
+    color: #ffffff;
 }
 
-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 20px 0;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #eaeaea;
-}
-
-.navbar-info {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.navbar-info p {
+a {
+    color: #ff4757;
+    text-decoration: none;
     font-weight: 500;
-    margin: 0;
+}
+
+a:hover {
+    color: #f53747;
+    text-decoration: underline;
+}
+
+/* Layout Containers */
+
+.container {
+    display: flex;
+    min-height: 100vh;
 }
 
 .container-left {
@@ -104,48 +103,49 @@ navbar {
 .container-centered {
     display: flex;
     flex-direction: column;
-    width: 90%;
-    max-width: 1400px;
+    max-width: 640px;
     margin: 0 auto;
-    padding: 2rem 0;
 }
 
-.spline-background {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
+.container-centered h2 {
+    margin: 1rem 0;
 }
 
-.spline-background spline-viewer {
-    width: 100%;
-    height: 100%;
-}
+/* Navbar */
 
-.content-overlay {
-    position: relative;
-    z-index: 1;
+navbar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    padding: 2rem;
-    color: #fff; 
+    width: 100%;
+    padding: 20px 0;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eaeaea;
 }
 
-.video-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
+.navbar-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(to right, white 35%, red 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 
-.video-container video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    filter: brightness(0.8);
+.navbar-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
+
+.navbar-info p {
+    font-weight: 500;
+    margin: 0;
+}
+
+/* Auth */
 
 .auth-container {
     width: 100%;
@@ -199,20 +199,18 @@ navbar {
     margin-top: 0.5rem;
 }
 
-.create-post-container {
-    background-color: #fff;
-    width: 100%;
-    padding: 2rem;
-    border-radius: 10px;
-}
+/* Post + Create Post */
 
-.container-centered h2 {
-    margin: 1rem 0;
+.create-post-container {
+    background-color: var(--post-color);
+    width: 100%;
+    padding: 0 2rem 2rem 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
 }
 
 .create-post-container h2 {
     padding: 0 0 1rem 0;
-    color: #333;
     position: relative;
     margin-bottom: 1.5rem;
 }
@@ -224,34 +222,37 @@ navbar {
     bottom: 0;
     width: 40px;
     height: 3px;
-    background-color: #ff4757;
-    border-radius: 5px;
+    background-color: var(--primary-color);
+    border-radius: 10px;
 }
 
 .post-container {
-    background-color: #fff;
+    background-color: var(--post-color);
     width: 100%;
-    border-radius: 10px;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
     overflow: hidden;
 }
 
 .post {
     padding: 1.5rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .post:last-child {
     border-bottom: none;
 }
 
-.post:hover {
-    background-color: #f9f9f9;
+.post:hover,
+.create-post-container:hover,
+input:hover,
+textarea:hover {
+    background-color: #131313;
 }
 
 .post h3 {
     margin: 0 0 1rem;
     font-size: 1.3rem;
-    color: #333;
 }
 
 .post p {
@@ -264,6 +265,27 @@ navbar {
     margin-top: 1rem;
 }
 
+.post a,
+.post form {
+    display: inline-block;
+}
+
+.post form button {
+    all: unset;
+    color: #f53747;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.post form button:hover {
+    text-decoration: underline;
+}
+
+/* Forms */
+
 form {
     display: flex;
     flex-direction: column;
@@ -273,11 +295,13 @@ input,
 textarea {
     margin-bottom: 1rem;
     padding: 12px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
     resize: none;
     font-family: inherit;
     font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--post-color);
 }
 
 input:focus,
@@ -290,12 +314,20 @@ textarea {
     min-height: 120px;
 }
 
+/* Buttons */
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 button {
     padding: 12px 24px;
     background-color: #ff4757;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 15px;
     cursor: pointer;
     font-weight: 600;
     font-size: 1rem;
@@ -308,31 +340,46 @@ button:hover {
     background-color: #f53747;
 }
 
-a {
-    color: #ff4757;
-    text-decoration: none;
-    font-weight: 500;
+/* Spline + Video */
+
+.spline-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
 }
 
-a:hover {
-    color: #f53747;
-    text-decoration: underline;
+.spline-background spline-viewer {
+    width: 100%;
+    height: 100%;
 }
 
-.post a,
-.post form {
-    display: inline-block;
+.content-overlay {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    color: #fff;
 }
 
-.post form button {
-    background-color: #dc3545;
-    padding: 8px 16px;
-    font-size: 0.9rem;
+.video-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
-.post form button:hover {
-    background-color: #c82333;
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: brightness(0.8);
 }
+
+/* Media Queries */
 
 @media (max-width: 992px) {
     .container {
