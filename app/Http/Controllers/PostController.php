@@ -21,11 +21,9 @@ class PostController extends Controller
         }
 
         $incomingFields = $request->validate([
-            'title' => ['required'],
             'body' => ['required'],
         ]);
 
-        $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
 
         $post->update($incomingFields);
@@ -41,11 +39,9 @@ class PostController extends Controller
 
     public function createPost(Request $request) {
         $incomingFields = $request->validate([
-            'title' => ['required'],
             'body' => ['required'],
         ]);
 
-        $incomingFields['title'] = strip_tags($incomingFields['title']);
         $incomingFields['body'] = strip_tags($incomingFields['body']);
         $incomingFields['user_id'] = Auth::id();
         Post::create($incomingFields);

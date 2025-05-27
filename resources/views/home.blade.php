@@ -13,7 +13,9 @@
             <!-- User logged in - centered content, no video -->
             <div class="container-centered">
                 <navbar>
-                    <h1 class="navbar-title">SwolePosts</h1>
+                    <a class="navbar-title-link" href="/">
+                        <h1 class="navbar-title">SwolePosts</h1>
+                    </a>
                     <div class="navbar-info">
                         <p>{{ auth()->user()->name }} logged in</p>
                         <form action="/logout" method="POST">
@@ -26,37 +28,70 @@
                     <h2>Create a new post</h2>
                     <form action="/create-post" method="POST">
                         @csrf
-                        <input type="text" name="title" placeholder="What'd you train today?">
                         <textarea id="autogrow" name="body" placeholder="Start typing..."></textarea>
                         <button>Save Post</button>
                     </form>
                 </div>
-                <h2>Everyones Posts</h2>
+                {{-- Everyones posts --}}
+                <div class="seperator">
+                    <h2>Feed</h2>
+                </div>
                 <div class="post-container">
                     @foreach ($otherPosts as $post)
                         <div class="post">
-                            <h3>{{ $post['title'] }} by {{ $post->user->name }} on {{ $post->created_at->format('M d, Y') }}
-                            </h3>
-                            {{ $post['body'] }}
+                            <div class="post-content">
+                                <div class="user-profile-pic">
+                                    <img src="https://m.media-amazon.com/images/I/61e-cD4efFL._AC_SX522_.jpg"
+                                        alt="">
+                                </div>
+                                <div class="post-content-inner">
+                                    <div class="post-content-inner-header">
+                                        <h4>{{ $post->user->name }}</h4>
+                                        <p>&nbsp;&nbsp;{{ $post->created_at->format('M d, Y') }}</p>
+                                    </div>
+                                    <p>{{ $post['body'] }}</p>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                 </div>
-                <h2>My posts</h2>
+                {{-- Users posts --}}
+                <div class="seperator">
+                    <h2>My posts</h2>
+                </div>
                 <div class="post-container">
                     @foreach ($myPosts as $post)
                         <div class="post">
-                            <h3>{{ $post['title'] }} by {{ $post->user->name }} on {{ $post->created_at->format('M d, Y') }}
-                            </h3>
-                            {{ $post['body'] }}
-                            <div class="button-group">
-                                <div class="button">
-                                    <a href="/edit-post/{{ $post->id }}">Edit</a>
+                            <div class="post-content">
+                                <div class="user-profile-pic">
+                                    <img src="https://m.media-amazon.com/images/I/61e-cD4efFL._AC_SX522_.jpg"
+                                        alt="">
                                 </div>
-                                <form action="/delete-post/{{ $post->id }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button>Delete</button>
-                                </form>
+                                <div class="post-content-inner">
+                                    <div class="post-content-inner">
+                                        <div class="post-content-inner-header">
+                                            <h4>{{ $post->user->name }}</h4>
+                                            <p>&nbsp;&nbsp;{{ $post->created_at->format('M d, Y') }}</p>
+                                        </div>
+                                    </div>
+                                    {{ $post['body'] }}
+                                    <div class="button-group">
+                                        <div class="button">
+                                            <a href="/edit-post/{{ $post->id }}">
+                                                <img class="post-icon" src="{{ asset('assets/edit_icon.svg') }}"
+                                                    alt="edit icon">
+                                            </a>
+                                        </div>
+                                        <form action="/delete-post/{{ $post->id }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button>
+                                                <img class="post-icon" src="{{ asset('assets/delete_icon.svg') }}"
+                                                    alt="delete icon">
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
