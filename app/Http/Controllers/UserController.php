@@ -16,12 +16,13 @@ class UserController extends Controller
             'loginpassword' => ['required'],
         ]));
 
+        // Remember me boolean. If true, site url will direct to user home page, else direct to loginpage
         $remember = $request->has('remember');
         if (Auth::attempt([
             'name' => $incomingFields['loginname'],
             'password' => $incomingFields['loginpassword']
         ], $remember)) {
-            // Authentication passed...
+            // Authentication passed
             $request->session()->regenerate();
         }
 

@@ -34,6 +34,7 @@ class PostController extends Controller
 
     public function showEditScreen(Post $post)
     {
+        // Prevent possbile edits to posts not of the user
         if (Auth::id() != $post['user_id']) {
             return redirect('/');
         }
@@ -79,5 +80,4 @@ class PostController extends Controller
         }
         return back();
     }
-
 }

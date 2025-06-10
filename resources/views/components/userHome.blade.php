@@ -73,38 +73,44 @@
         <h2>My posts</h2>
     </div>
     <div class="post-container">
-        @foreach ($myPosts as $post)
-            <div class="post">
-                <div class="post-content">
-                    <div class="user-profile-pic">
-                        <img src="https://m.media-amazon.com/images/I/61e-cD4efFL._AC_SX522_.jpg" alt="">
-                    </div>
-                    <div class="post-content-inner">
-                        <div class="post-content-inner">
-                            <div class="post-content-inner-header">
-                                <h4>{{ $post->user->name }}</h4>
-                                <p>&nbsp;&nbsp;{{ $post->created_at->format('M d, Y') }}</p>
-                            </div>
+        @if (count($myPosts) == 0)
+            <div class="post-user-empty">
+                You haven't posted anything yet!
+            </div>
+        @else
+            @foreach ($myPosts as $post)
+                <div class="post">
+                    <div class="post-content">
+                        <div class="user-profile-pic">
+                            <img src="https://m.media-amazon.com/images/I/61e-cD4efFL._AC_SX522_.jpg" alt="">
                         </div>
-                        {{ $post['body'] }}
-                        <div class="button-group">
-                            <div class="button">
-                                <a href="/edit-post/{{ $post->id }}">
-                                    <img class="post-icon" src="{{ asset('assets/edit_icon.svg') }}" alt="edit icon">
-                                </a>
+                        <div class="post-content-inner">
+                            <div class="post-content-inner">
+                                <div class="post-content-inner-header">
+                                    <h4>{{ $post->user->name }}</h4>
+                                    <p>&nbsp;&nbsp;{{ $post->created_at->format('M d, Y') }}</p>
+                                </div>
                             </div>
-                            <form action="/delete-post/{{ $post->id }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button>
-                                    <img class="post-icon" src="{{ asset('assets/delete_icon.svg') }}" alt="delete icon">
-                                </button>
-                            </form>
+                            {{ $post['body'] }}
+                            <div class="button-group">
+                                <div class="button">
+                                    <a href="/edit-post/{{ $post->id }}">
+                                        <img class="post-icon" src="{{ asset('assets/edit_icon.svg') }}" alt="edit icon">
+                                    </a>
+                                </div>
+                                <form action="/delete-post/{{ $post->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button>
+                                        <img class="post-icon" src="{{ asset('assets/delete_icon.svg') }}" alt="delete icon">
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        @endif
     </div>
 </div>
 <script>

@@ -321,6 +321,13 @@ navbar {
     background-color: var(--post-hover-color);
 }
 
+.post-user-empty {
+    text-align: left;
+    margin-left: var(--spacing-md);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+}
+
 .post h3 {
     /* margin: 0 0 var(--spacing-sm); */
 }
@@ -333,7 +340,8 @@ navbar {
 .post-actions {
     display: flex;
     gap: var(--spacing-sm);
-    margin-top: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+    flex-direction: row;
 }
 
 .post a,
@@ -649,10 +657,12 @@ button:hover {
     align-items: center;
     cursor: pointer;
     transition: color 0.2s;
+    gap: 0.25rem;
+    margin-left: -2px;
 }
 .post-actions .like-btn .icon-svg {
-    width: 1.5em;
-    height: 1.5em;
+    width: 1.35rem;
+    height: 1.35rem;
     display: block;
 }
 .post-actions .like-btn.liked .icon-svg,
@@ -660,4 +670,10 @@ button:hover {
     color: #ff4757;
     stroke: #ff4757;
     fill: #ff4757;
+}
+
+
+.like-count {
+    font-size: small;
+    color: #b4b4b4;
 }
