@@ -8,11 +8,11 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     $myPosts = [];
-    $otherPosts = Post::all();
+    $otherPosts = Post::with('likes')->get();
 
     if (Auth::check()) {
-        $myPosts = Post::where('user_id', Auth::id())->get();
-        $otherPosts = Post::where('user_id', '!=', Auth::id())->get();
+        $myPosts = Post::with('likes')->where('user_id', Auth::id())->get();
+        $otherPosts = Post::with('likes')->where('user_id', '!=', Auth::id())->get();
     }
 
     return view('home', [
@@ -32,3 +32,6 @@ Route::post('/create-post', [PostController::class, 'createPost']);
 Route::get('/edit-post/{post}', [PostController::class, 'showEditScreen']);
 Route::put('/edit-post/{post}', [PostController::class, 'updatePost']);
 Route::delete('/delete-post/{post}', [PostController::class, 'deletePost']);
+
+Route::post('/posts/{post}/like', [PostController::class, 'like'])->middleware('auth');
+Route::post('/posts/{post}/unlike', [PostController::class, 'unlike'])->middleware('auth');

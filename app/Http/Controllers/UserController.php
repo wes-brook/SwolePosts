@@ -16,10 +16,11 @@ class UserController extends Controller
             'loginpassword' => ['required'],
         ]));
 
+        $remember = $request->has('remember');
         if (Auth::attempt([
             'name' => $incomingFields['loginname'],
             'password' => $incomingFields['loginpassword']
-        ])) {
+        ], $remember)) {
             // Authentication passed...
             $request->session()->regenerate();
         }

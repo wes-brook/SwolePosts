@@ -9,7 +9,20 @@ class Post extends Model
     // protected $fillable = ['title', 'body', 'user_id'];
     protected $fillable = ['body', 'user_id'];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(\App\Models\Like::class);
+    }
+
+    public function likedBy($user)
+    {
+        if (!$user)
+            return false;
+        return $this->likes()->where('user_id', $user->id)->exists();
     }
 }
