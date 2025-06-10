@@ -2,7 +2,7 @@
 <div class="container-left">
     <div class="video-container">
         <video autoplay muted loop>
-            <source src="<?php echo asset('assets/videoplayback.mp4'); ?>" type="video/mp4">
+            <source src="<?php echo asset('assets/LoginPageVideo.mp4'); ?>" type="video/mp4">
             If you're seeing this, your browser could not handle Ronnie Yeah Buddy Coleman.
         </video>
     </div>
@@ -14,8 +14,8 @@
     </div>
 
     <div class="content-overlay">
-        <h1>SwolePosts</h1>
-        <p>Train together. A digital fitness community where gains await us.</p>
+        <h1>GymThreads</h1>
+        <p>Where your journey fuels others and theirs fuels you.<br>Welcome to the future of fitness.</p>
         <div class="auth-container">
             <div class="auth-forms">
                 <div class="auth-form">
