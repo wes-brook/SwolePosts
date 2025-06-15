@@ -1,7 +1,7 @@
 @include('components.userNavigationButtons')
-<div class="spline-background-full">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.96/build/spline-viewer.js"></script>
-    <spline-viewer url="https://prod.spline.design/H5LLDspru1NGKy9d/scene.splinecode"></spline-viewer>
+@include('components.splineBackground')
+<div class="user-profile-container">
+test
 </div>
 <div class="container-centered">
     <navbar>
