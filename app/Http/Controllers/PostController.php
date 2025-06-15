@@ -56,7 +56,7 @@ class PostController extends Controller
     public function like(Request $request, $postId)
     {
         $post = Post::findOrFail($postId);
-        $user = auth()->user();
+        $user = Auth::user();
 
         if (!$post->likedBy($user)) {
             $post->likes()->create(['user_id' => $user->id]);
@@ -71,7 +71,7 @@ class PostController extends Controller
     public function unlike(Request $request, $postId)
     {
         $post = Post::findOrFail($postId);
-        $user = auth()->user();
+        $user = auth()->Auth::user();
 
         $post->likes()->where('user_id', $user->id)->delete();
 

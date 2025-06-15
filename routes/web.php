@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
+// Pass 'myPosts' & 'otherPosts' data to the home blade template for display
 Route::get('/', function () {
     $myPosts = [];
     $otherPosts = Post::with('likes')->get();
@@ -20,7 +21,6 @@ Route::get('/', function () {
         'otherPosts' => $otherPosts
     ]);
 });
-
 
 // User routes
 Route::post('/register', [UserController::class, 'register']);

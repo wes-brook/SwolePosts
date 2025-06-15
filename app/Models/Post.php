@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+// Laravel assumes the db its connected to contains a table like "posts" (case-insensitive)
 class Post extends Model
 {
     // protected $fillable = ['title', 'body', 'user_id'];
