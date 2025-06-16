@@ -318,7 +318,7 @@ navbar {
 .create-post-container:hover input,
 .create-post-container:hover textarea,
 .seperator:hover {
-    background-color: var(--post-hover-color);
+    /* background-color: var(--post-hover-color); */
 }
 
 .post-user-empty {
@@ -680,24 +680,72 @@ button:hover {
     fill: #ff4757;
 }
 
-
 .like-count {
     font-size: small;
     color: #b4b4b4;
 }
 
-.user-profile-container {
+.user-post-container {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50vw;
-    height: 50vh;
-    color: #000;
+    height: 23vh;
+    color: var(--text-color);
+    background-color: var(--post-color);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius-lg);
     z-index: 10;
     display: flex; /* optional: for inner content alignment */
     justify-content: center; /* optional */
-    align-items: center;     /* optional */
+    align-items: center; /* optional */
     z-index: 10;
+    width: calc(var(--container-max-width) - 1.1rem);
 }
+
+.user-post-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding: var(--spacing-sm) var(--spacing-md) var(--spacing-sm)
+        var(--spacing-md);
+}
+
+.user-post-upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-post-divider {
+    width: calc(100% + var(--spacing-md) * 2); /* stretch beyond padding */
+    margin-left: calc(-1 * var(--spacing-md)); /* offset to left */
+    margin-right: calc(-1 * var(--spacing-md)); /* offset to right */
+    border-bottom: solid 1px var(--border-color);
+}
+
+.user-post-upper button {
+    all: unset;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: var(--spacing-sm);
+}
+
+.dim {
+    filter: brightness(0.25);
+}
+
+.post-content-user {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-sm) 0 var(--spacing-sm) 0;
+}
+
+/* .post-content-user h4 {
+    line-height: 1;
+} */
 
