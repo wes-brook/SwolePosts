@@ -1,6 +1,6 @@
 @include('components.userNavigationButtons')
 @include('components.splineBackground')
-{{-- <div id="new-gym-thread" class="user-post-container">
+<div id="new-gym-thread" class="user-post-container" style="display: none;">
     <div class="user-post-content">
         <div class="user-post-upper">
             <button>Cancel</button>
@@ -25,7 +25,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 <div class="container-centered">
     <navbar>
         <a class="navbar-title-link" href="/">
@@ -38,12 +38,20 @@
         </div>
     </navbar>
     <div class="create-post-container">
-        <h2>Create a new post</h2>
-        <form action="/create-post" method="POST">
+        <div class="create-post-container-content">
+            <div class="user-profile-pic">
+                <img src="https://m.media-amazon.com/images/I/61e-cD4efFL._AC_SX522_.jpg" alt="">
+            </div>
+            <div id="new-gymthread" class="create-post-container-content-text">
+                What'd you hit today?
+            </div>
+        </div>
+        {{-- <h2>Create a new post</h2> --}}
+        {{-- <form action="/create-post" method="POST">
             @csrf
             <textarea id="autogrow" name="body" placeholder="Start typing..."></textarea>
             <button>Save Post</button>
-        </form>
+        </form> --}}
     </div>
     {{-- Everyones posts --}}
     <div class="seperator">
@@ -59,7 +67,13 @@
                     <div class="post-content-inner">
                         <div class="post-content-inner-header">
                             <h4>{{ $post->user->name }}</h4>
-                            <p>&nbsp;&nbsp;{{ $post->created_at->format('M d, Y') }}</p>
+                            <p>&nbsp;&nbsp;
+                                @if($post->created_at->diffInDays() > 30)
+                                    {{$post->created_at->format('M d, Y')}}
+                                @else
+                                    {{$post->created_at->diffForHumans()}}
+                                @endif
+                            </p>
                         </div>
                         <p>{{ $post['body'] }}</p>
                         <div class="post-actions">
@@ -171,3 +185,23 @@
         });
     });
 </script>
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const textarea = document.querySelector('textarea#autogrow');
+        const newGymThread = document.getElementById('new-gym-thread');
+
+        // Hide the div initially
+        newGymThread.style.display = 'none';
+
+        textarea.addEventListener('focus', () => {
+            newGymThread.style.display = 'flex';
+        });
+
+        document.addEventListener('click', (e) => {
+            // If the click target is NOT inside #new-gym-thread or the textarea, hide it
+            if (!newGymThread.contains(e.target) && e.target !== textarea) {
+                newGymThread.style.display = 'none';
+            }
+        });
+    });
+</script> --}}

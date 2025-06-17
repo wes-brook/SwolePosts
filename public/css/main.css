@@ -263,26 +263,27 @@ navbar {
     background-color: var(--post-color);
     width: 100%;
     padding: 0 var(--spacing-lg) var(--spacing-lg) var(--spacing-lg);
-    border-radius: var(--border-radius-lg);
+    border-top-left-radius: var(--border-radius-lg);
+    border-top-right-radius: var(--border-radius-lg);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     border: var(--border-width) solid var(--border-color);
-    margin-bottom: var(--spacing-lg);
+    border-bottom: none;
+    padding: var(--spacing-md);
+    padding-bottom: var(--spacing-sm);
 }
 
-.create-post-container h2 {
-    padding: 0 0 var(--spacing-sm) 0;
-    position: relative;
-    margin-bottom: var(--spacing-md);
+.create-post-container-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
 }
 
-.create-post-container h2:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: var(--underline-width);
-    height: var(--underline-height);
-    background-color: var(--primary-color);
-    border-radius: var(--border-radius-md);
+.create-post-container-content-text {
+    width: 100%;
+    color: var(--muted-text-color);
+    cursor: text;
 }
 
 .post-container {
@@ -299,6 +300,13 @@ navbar {
     border-bottom: var(--border-width) solid var(--border-color);
 }
 
+.post-content-inner-header h4,
+.post-content-inner-header p {
+    line-height: 1.15;
+    font-size: 15px;
+    color: #F3F5F7;
+}
+
 .post:last-child {
     border-bottom: none;
     border-bottom-left-radius: var(--border-radius-lg);
@@ -307,7 +315,6 @@ navbar {
 
 .seperator {
     background-color: var(--post-color);
-    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
     border: var(--border-width) solid var(--border-color);
     padding: 0 var(--spacing-md) 0 var(--spacing-md);
     border-bottom: none;
@@ -379,6 +386,11 @@ navbar {
 
 .post-content-inner-header {
     display: flex;
+    /* margin-bottom: 0.25rem; */
+}
+
+.post-content-inner p {
+    font-size: 15px;
 }
 
 .post-content-inner-header p {

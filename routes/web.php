@@ -9,11 +9,11 @@ use App\Http\Controllers\UserController;
 // Pass 'myPosts' & 'otherPosts' data to the home blade template for display
 Route::get('/', function () {
     $myPosts = [];
-    $otherPosts = Post::with('likes')->get();
+    $otherPosts = Post::with('likes')->inRandomOrder()->get();
 
     if (Auth::check()) {
         $myPosts = Post::with('likes')->where('user_id', Auth::id())->get();
-        $otherPosts = Post::with('likes')->where('user_id', '!=', Auth::id())->get();
+        $otherPosts = Post::with('likes')->where('user_id', '!=', Auth::id())->inRandomOrder()->get();
     }
 
     return view('home', [
